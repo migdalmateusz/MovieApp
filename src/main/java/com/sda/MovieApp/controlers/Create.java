@@ -16,6 +16,7 @@ public class Create
     public void createMovie(@RequestBody Movie movie)
     {
         movieRepository.put(currentId, movie);
+        movie.setId(currentId);
         currentId = currentId + 1;
     }
 }
