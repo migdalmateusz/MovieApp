@@ -5,6 +5,6 @@ import java.util.Map;
 
 public class MovieRepository {
 
-    public static Map<Integer, Movie> movieRepository = new HashMap();
-    public static Integer currentId = 0;
+    public Map<Integer, Movie> movieRepository = new HashMap();
+    public Integer currentId = 0;
 }
