@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Create
 {
-    List<Movie> movieRepository = new ArrayList<>();
+    public static List<Movie> movieRepository = new ArrayList<>();
     @PostMapping("/movies")
     public void createMovie(@RequestBody String title, Integer id )
     {
