@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReadController {
 
-    @GetMapping("/movies/{id}")
-    public Movie readMovie {
-    }
-
+//    @GetMapping("/movies/{id}")
+//    public Movie readMovie {
+//    }
 
 }
