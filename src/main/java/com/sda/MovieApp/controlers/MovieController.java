@@ -3,6 +3,7 @@ package com.sda.MovieApp.controlers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -43,20 +44,18 @@ public class MovieController {
         return movieRepository.readMovie(id);
     }
 
+//    @GetMapping("/movies")
+//    @ResponseBody
+//    public Map readMovie() {
+//        return movieRepository.readAll();
+//    }
+
     @GetMapping("/movies")
-    @ResponseBody
-    public Map readMovie() {
-        return movieRepository.readAll();
+    public String showMovies(final ModelMap modelMap) {
+        modelMap.addAttribute("movie", movieRepository.readAll());
+        return "mainPage";
     }
 
-//    private static final String movie = "movies";
-//
-//    @GetMapping("/movies")
-//    public String readMovie(final ModelMap modelMap) {
-//        modelMap.addAttribute(movie, movieRepository.movieRepository.get(0));
-//        return "mainPage";
-//    }
-//
     @PutMapping("/movies/{id}")
     public void modificationMovie(@PathVariable(value = "id") Integer id, @RequestBody String title) throws MovieNotFoundExceptions {
         movieRepository.changeMovie(id, title);

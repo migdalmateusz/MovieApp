@@ -5,8 +5,8 @@
     <title>Welcome Page</title>
 </head>
 <body>
-<tr th:each="Movie: ${movies}">
-    <td th:text="${movies.title}"></td>
+<tr th:each="movie: ${movie}">
+    <td th:text="${movie.title}"></td>
 </tr>
 </body>
 </html>

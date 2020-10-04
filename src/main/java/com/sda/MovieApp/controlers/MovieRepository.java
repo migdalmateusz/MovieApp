@@ -1,7 +1,6 @@
 package com.sda.MovieApp.controlers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MovieRepository {
 
@@ -32,8 +31,8 @@ public class MovieRepository {
         }
     }
 
-    public Map readAll () {
-        return movieRepository;
+    public Collection<Movie> readAll () {
+        return List.copyOf(movieRepository.values());
     }
 
     public void changeMovie (Integer id, String title) throws MovieNotFoundExceptions {
