@@ -23,25 +23,35 @@ public class MovieController {
     }
 
     @GetMapping("/movies/{id}")
-    public Movie readMovie (@PathVariable(value = "id") Integer id) {
-        return movieRepository.movieRepository.get(id);
+    public Movie readMovie(@PathVariable(value = "id") Integer id) {
+        if (movieRepository.movieRepository.get(id) == null) {
+            throw new MovieNotFoundExceptions("There is no movie");
+        } else {
+            return movieRepository.movieRepository.get(id);
+        }
     }
 
     @GetMapping("/movies")
-    public Map readMovie ()
-    {
+    public Map readMovie() {
         return movieRepository.movieRepository;
     }
 
     @PutMapping("/movies/{id}")
-    public void modificationMovie (@PathVariable(value = "id") Integer id, @RequestBody String title) {
-        movieRepository.movieRepository.get(id).setTitle(title);
+    public void modificationMovie(@PathVariable(value = "id") Integer id, @RequestBody String title) {
+        if (movieRepository.movieRepository.get(id) == null) {
+            throw new MovieNotFoundExceptions("There is no movie");
+        } else {
+            movieRepository.movieRepository.get(id).setTitle(title);
+        }
     }
 
     @DeleteMapping("/movies/{id}")
-    public void deleteMovie(@PathVariable(value = "id") Integer id)
-    {
-        movieRepository.movieRepository.remove(id);
+    public void deleteMovie(@PathVariable(value = "id") Integer id) {
+        if (movieRepository.movieRepository.get(id) == null) {
+            throw new MovieNotFoundExceptions("There is no movie");
+        } else {
+            movieRepository.movieRepository.remove(id);
+        }
     }
 }
 
