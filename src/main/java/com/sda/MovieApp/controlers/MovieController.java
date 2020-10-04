@@ -17,7 +17,7 @@ public class MovieController {
     }
 
     @PostMapping("/movies")
-    public void createMovie(@RequestBody Movie movie) {
+    public void createMovie(@RequestBody Movie movie) throws MovieConflictExceptions {
         boolean movieExist = false;
         for (int i = 0; i < movieRepository.movieRepository.size(); i++) {
             if (movieRepository.movieRepository.get(i).getTitle().equals(movie.getTitle())) {
@@ -33,9 +33,10 @@ public class MovieController {
         }
     }
 
-    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "Movie is not already exist")
+    @ResponseStatus(value = HttpStatus.CONFLICT)
     @ExceptionHandler(MovieConflictExceptions.class)
-    public void conflict() {
+    public String conflict() {
+        return "Movie is not already exist";
     }
 
     @GetMapping("/movies/{id}")

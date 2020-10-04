@@ -1,10 +1,5 @@
 package com.sda.MovieApp.controlers;
 
-public class MovieConflictExceptions extends RuntimeException
+public class MovieConflictExceptions extends Exception
 {
-    public MovieConflictExceptions() {
-        super();
-    }
-
-
 }
