@@ -36,13 +36,19 @@ public class MovieController {
     @ResponseStatus(value = HttpStatus.CONFLICT)
     @ExceptionHandler(MovieConflictExceptions.class)
     public String conflict() {
-        return "Movie is not already exist";
+        return "Movie is already exist";
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(MovieNotFoundExceptions.class)
+    public String notFound() {
+        return "Movie is not exist";
     }
 
     @GetMapping("/movies/{id}")
-    public Movie readMovie(@PathVariable(value = "id") Integer id) {
+    public Movie readMovie(@PathVariable(value = "id") Integer id) throws MovieNotFoundExceptions {
         if (movieRepository.movieRepository.get(id) == null) {
-            throw new MovieNotFoundExceptions("There is no movie");
+            throw new MovieNotFoundExceptions();
         } else {
             return movieRepository.movieRepository.get(id);
         }
@@ -54,18 +60,18 @@ public class MovieController {
     }
 
     @PutMapping("/movies/{id}")
-    public void modificationMovie(@PathVariable(value = "id") Integer id, @RequestBody String title) {
+    public void modificationMovie(@PathVariable(value = "id") Integer id, @RequestBody String title) throws MovieNotFoundExceptions {
         if (movieRepository.movieRepository.get(id) == null) {
-            throw new MovieNotFoundExceptions("There is no movie");
+            throw new MovieNotFoundExceptions();
         } else {
             movieRepository.movieRepository.get(id).setTitle(title);
         }
     }
 
     @DeleteMapping("/movies/{id}")
-    public void deleteMovie(@PathVariable(value = "id") Integer id) {
+    public void deleteMovie(@PathVariable(value = "id") Integer id) throws MovieNotFoundExceptions {
         if (movieRepository.movieRepository.get(id) == null) {
-            throw new MovieNotFoundExceptions("There is no movie");
+            throw new MovieNotFoundExceptions();
         } else {
             movieRepository.movieRepository.remove(id);
         }
